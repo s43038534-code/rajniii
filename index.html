@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Birthday Vibes 🎂🌙🌹</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  height:100vh;
+  font-family:'Poppins',sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, #ffd6e8, transparent 35%),
+    radial-gradient(circle at 85% 30%, #d6f0ff, transparent 40%),
+    radial-gradient(circle at 50% 80%, #fff3c4, transparent 45%),
+    linear-gradient(180deg,#ff9a9e,#fad0c4,#fbc2eb,#a1c4fd);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* 🌙 Big realistic moon */
+.moon{
+  position:fixed;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  top:6%;
+  right:6%;
+  background:radial-gradient(circle at 30% 30%, #fff, #e0e0e0, #cfcfcf);
+  box-shadow:0 0 80px rgba(255,255,255,.6);
+  opacity:.55;
+}
+
+/* 🌹 Floating roses */
+.rose{
+  position:fixed;
+  font-size:38px;
+  animation:roseFloat 10s linear infinite;
+  opacity:.9;
+}
+@keyframes roseFloat{
+  from{transform:translateY(110vh) rotate(0deg)}
+  to{transform:translateY(-10vh) rotate(360deg)}
+}
+
+.story{
+  width:360px;
+  height:640px;
+  background:rgba(255,255,255,0.97);
+  border-radius:30px;
+  padding:22px;
+  box-shadow:0 30px 60px rgba(0,0,0,.35);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  animation:enter 1s ease;
+}
+@keyframes enter{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+
+.top{text-align:center}
+.top h1{color:#ff2f6d;font-size:28px}
+.top h2{font-size:17px;color:#444;margin-top:6px}
+
+/* 🎂 More realistic animated cake */
+.cake-area{text-align:center}
+.cake{
+  position:relative;
+  width:200px;
+  margin:0 auto;
+  animation:floatCake 4s infinite ease-in-out;
+}
+@keyframes floatCake{
+  0%,100%{transform:translateY(0) rotate(0)}
+  25%{transform:translateY(-6px) rotate(1deg)}
+  50%{transform:translateY(0) rotate(0)}
+  75%{transform:translateY(6px) rotate(-1deg)}
+}
+
+.layer{
+  height:48px;
+  border-radius:22px;
+  margin-top:-14px;
+  position:relative;
+  box-shadow:inset 0 -8px rgba(0,0,0,.18),0 6px 12px rgba(0,0,0,.2);
+}
+
+/* Chocolate drip */
+.choco{
+  background:linear-gradient(#4e342e,#3e2723);
+  overflow:hidden;
+}
+.choco::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(-45deg,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 4px,transparent 4px,transparent 8px);
+}
+.choco::before{
+  content:"🍫 🍫 🍫";
+  position:absolute;
+  top:-8px;
+  width:100%;
+  text-align:center;
+  font-size:18px;
+  animation:drip 2s infinite alternate;
+}
+@keyframes drip{from{transform:translateY(0)}to{transform:translateY(6px)}}
+
+.sponge1{background:linear-gradient(#ffb3ba,#ff8fab)}
+.sponge2{background:linear-gradient(#fff1c1,#ffd966)}
+
+/* Candle */
+.candle{
+  position:absolute;
+  top:-40px;
+  left:50%;
+  transform:translateX(-50%);
+  width:12px;
+  height:42px;
+  background:repeating-linear-gradient(45deg,#ff6f91,#ff6f91 4px,#ffd1dc 4px,#ffd1dc 8px);
+  border-radius:6px;
+  cursor:pointer;
+}
+.flame{
+  position:absolute;
+  top:-26px;
+  left:-9px;
+  width:32px;
+  height:32px;
+  background:radial-gradient(circle,#fff6b0,#ffb703,#fb8500);
+  border-radius:50%;
+  box-shadow:0 0 35px #ffb703;
+  animation:flicker .2s infinite alternate;
+}
+@keyframes flicker{from{transform:scale(1)}to{transform:scale(1.4)}}
+.off{display:none}
+.tap{font-size:13px;color:#ff2f6d;margin-top:6px}
+
+.note{font-size:15px;color:#555;text-align:center;min-height:90px}
+
+/* 🥟 Animated momos */
+.surprise{display:none;text-align:center;animation:pop .6s ease}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.plate{margin:10px auto;background:#f3f3f3;border-radius:50%;padding:18px;box-shadow:inset 0 -6px #ddd}
+.momo{
+  font-size:36px;
+  animation:bounce 1s infinite alternate;
+}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-10px)}}
+
+.bottom{text-align:center;font-size:13px;color:#888}
+</style>
+</head>
+<body>
+<div class="moon"></div>
+
+<div class="story">
+  <div class="top">
+    <h1>Happy Birthday 🎉</h1>
+    <h2 id="nameAge"></h2>
+  </div>
+
+  <div class="cake-area">
+    <div class="cake">
+      <div class="candle" onclick="blow()"><div class="flame" id="flame"></div></div>
+      <div class="layer choco"></div>
+      <div class="layer sponge1"></div>
+      <div class="layer sponge2"></div>
+    </div>
+    <div class="tap">TAP THE CANDLE… cake is waiting patiently 😌🎂</div>
+  </div>
+
+  <div class="note" id="note"></div>
+
+  <div class="surprise" id="surprise">
+    <div style="color:#ff2f6d;font-weight:600">MOMO TIME 🥟🎉</div>
+    <div class="plate">
+      <div class="momo">🥟 🥟 🥟</div>
+      <div class="momo">🥟 🥟 🥟</div>
+    </div>
+    <div style="font-size:14px;color:#666">Eat happily. Birthday calories don’t count 😄</div>
+  </div>
+
+  <div class="bottom">bakwaas lga ho to sorry😓🙇‍♂️</div>
+</div>
+
+<audio id="music" src="https://www.soundjay.com/human/sounds/happy-birthday-song-01.mp3"></audio>
+
+<script>
+const name="Rajnii🫠";
+const age="16";
+const msg="Hope your day is as sweet as cake, as warm as friendship, and as fun as unlimited momos 🥟😄";
+
+nameAge.innerText=`${name} • ${age}`;
+let i=0;(function type(){if(i<msg.length){note.innerHTML+=msg.charAt(i++);setTimeout(type,35)}})();
+
+/* Roses animation */
+setInterval(()=>{
+  let r=document.createElement('div');
+  r.className='rose';
+  r.innerText='🌹';
+  r.style.left=Math.random()*100+'vw';
+  document.body.appendChild(r);
+  setTimeout(()=>r.remove(),10000);
+},900);
+
+function blow(){
+  flame.classList.add('off');
+  music.play();
+  surprise.style.display='block';
+}
+</script>
+</body>
+</html>
